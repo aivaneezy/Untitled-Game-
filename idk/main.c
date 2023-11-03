@@ -49,7 +49,27 @@ void handle_inputs()
 			printf("Window is close... \n");
 			game_is_running = false;
 		}
+		else if (event.type == SDL_KEYDOWN)
+		{
+			// resetting keys value
+			key.W = 0;
+			key.S = 0;
+			switch (event.key.keysym.sym)
+			{
+			case SDLK_w:
+				key.W = 1;
+				break;
+			case SDLK_s:
+				key.S = 1;
+				break;
+			}
+			
+		}
+		
 	}
+	
+
+	
 }
 
 void update_Sdl()
@@ -75,18 +95,27 @@ int main(int argc, char* argv[])
 	sdl_Window();
 	sdl_Render();
 
+	/*Init IMG*/
 	Init();
 	/*Player1 sprite*/
 	LoadImages();
-
-
+	// FPS for time crapping
+	int fps = 60;
+	Uint32 desiredTime = 1000 / fps;
 	while (game_is_running)
 	{
+		// Getting sdl ticks.
+		Uint32 starTime = SDL_GetTicks();
+		Uint32 elapsedTime = SDL_GetTicks() - starTime;
 
-		handle_inputs();
-
-
+		handle_inputs();	
+		Update();
 		update_Sdl();
+
+		if (elapsedTime < desiredTime)
+		{
+			SDL_Delay(desiredTime - elapsedTime);
+		}
 	}
 
 	return 0;

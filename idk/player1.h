@@ -3,10 +3,19 @@
 #include "textureManager.h"
 
 // variables
-SDL_Rect player;
+SDL_Rect playerDst;
 SDL_Texture* player1Tex;
 
 
+
+typedef struct
+{
+	int W;
+	int S;
+	int D;
+	int A;
+}Key;
+Key key;
 
 // functions
 void LoadImages();

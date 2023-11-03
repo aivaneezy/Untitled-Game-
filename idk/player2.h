@@ -2,7 +2,7 @@
 
 
 // variables
-SDL_Rect* player;
+SDL_Rect* playerDst;
 
 
 
